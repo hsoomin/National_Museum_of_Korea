@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>main4 온라인전시관 슬라이드</title>
+    <style>
+        *{margin: 0; padding: 0;}
+        li{list-style: none;}
+        a{text-decoration: none;}
+
+        .online_exhibition .slider-wrapper{position: relative; width: 960px; margin: 0 auto;
+        height: 300px; overflow: hidden;}
+        .online_exhibition .slider-wrapper .slides{position: absolute; left: 0; top: 0; /* width: 2610px; */
+        transition: .3s ease-out; }
+        
+        /*스크립트 .animated*/
+        /* .online_exhibition .slider-wrapper .slides.animated{transition: .3s ease-out;} */
+
+        .online_exhibition .slider-wrapper .slides li:not(:last-child){float: left; margin-right: 30px;}
+       
+        /* 페이지 버튼 */
+        .online_exhibition .controller span{font-size: 16px; color: #444;  position: absolute; top: 7px; left: 7px;}
+        .online_exhibition .controller{position: absolute; top: 0; right: 0; width: 80px;}
+        .online_exhibition .controller .swiper-prev-btn{background: url(./images/btn_swiper_prev.png) no-repeat;
+         position: absolute;
+        top: 10px;
+        left: -13px;
+        margin-top: 0;
+        width: 10px;
+        height: 19px;
+        z-index: 10;
+        cursor: pointer;
+        background-size: 10px 19px;
+        text-indent: -9999px;}
+        .online_exhibition .controller .swiper-next-btn{background: url(./images/btn_swiper_next.png) no-repeat;
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        margin-top: 0;
+        width: 10px;
+        height: 19px;
+        z-index: 10;
+        cursor: pointer;
+        background-size: 10px 19px;
+        text-indent: -9999px;} 
+
+
+    </style>
+</head>
+<body>
+    <div class="online_exhibition">
+        <h3>온라인 전시관
+            <a href="#">
+                <button type="button" class="btn-plus"></button>
+            </a>
+        </h3>
+        <div class="controller">
+            <div class="swiper-prev-btn">prev</div>
+            <span>1 / 7</span>
+            <div class="swiper-next-btn">next</div>
+        </div>
+        <div class="slider-wrapper">
+            <ul class="slides">
+                <li>
+                    <img src="http://placehold.it/300x300" alt="">
+                </li>
+                <li>
+                    <img src="http://placehold.it/300x300" alt="">
+                </li>
+                <li>
+                    <img src="http://placehold.it/300x300" alt="">
+                </li>
+                <li>
+                    <img src="http://placehold.it/300x300" alt="">
+                </li>
+                <li>
+                    <img src="http://placehold.it/300x300" alt="">
+                </li>
+                <li>
+                    <img src="http://placehold.it/300x300" alt="">
+                </li>
+                <li>
+                    <img src="http://placehold.it/300x300" alt="">
+                </li>
+                <li>
+                    <img src="http://placehold.it/300x300" alt="">
+                </li>
+            </ul>
+        </div>
+        <script>
+            var slides=document.querySelector('.slides'), //ul
+                slide=document.querySelectorAll('.slides li'),
+                currentIdx=0, //현재 몇번째인지
+                slideCount=slide.length, //슬라이드 갯수
+                slideWidth=300, // li 넓이
+                slideMargin=30, //li 마진
+                prevBtn=document.querySelector('.swiper-prev-btn'),
+                nextBtn=document.querySelector('.swiper-next-btn');
+
+            //6.7
+            /* makeClone();
+            function makeClone(){
+            for(var i=0;i<slideCount;i++){   //요소 뒤에 복사본 추가
+                //클론 노드 :복사
+                var cloneSlide=slide[i].cloneNode(true);
+                cloneSlide.classList.add('clone');
+                //.appendChild
+                slides.appendChild(cloneSlide);
+            }
+            for(var i=slideCount-1;i>=0;i--){  //요소 앞에 복사본 추가
+                var cloneSlide=slide[i].cloneNode(true);
+                cloneSlide.classList.add('clone');
+                slides.prepend(cloneSlide);
+            }
+            updateWidth();
+            }
+            
+            function updateWidth(){
+            var currentSlides=document.querySelectorAll('.slides li');
+            var newSlideCount=currentSlides.length;
+
+            var newWidth=(slideWidth+slideMargin)*newSlideCount-slideMargin+'px';
+            slides.style.width=newWidth;
+            } */
+
+            console.log(slides)
+
+            slides.style.width=(slideWidth+slideMargin)*slideCount-slideMargin+'px';
+            
+            function moveSlide(num){
+                slides.style.left=-num*330+'px';
+                currentIdx=num;
+            }
+            nextBtn.addEventListener('click', function(){
+                if(currentIdx<slideCount-3){   //3개만 보이는거니까
+                    moveSlide(currentIdx+1);
+                    console.log(currentIdx);
+                }else{
+                    moveSlide(0); //처음으로 돌아가는거
+                }
+            });
+            prevBtn.addEventListener('click', function(){
+                if(currentIdx>0){  
+                    moveSlide(currentIdx-1);
+                    console.log(currentIdx);
+                }else{
+                    moveSlide(slideCount-3); //처음으로 돌아가는거
+                }
+            });
+        </script>
+    </div>
+</body>
+</html>
