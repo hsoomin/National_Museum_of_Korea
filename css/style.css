@@ -33,12 +33,12 @@ h2,h3{font-weight: bold;}
 
 /*a.on*/
 .util ul li a.on{background: #000; color: #fff;}
-.util ul li:nth-child(4) a.on>i,.util ul li:nth-child(5) a.on>i{ background: url(../images/ico_sm_white_close.png) no-repeat center; }
+.util ul li:nth-child(4) a.on>i, .util ul li:nth-child(5) a.on>i{ background: url(../images/ico_sm_white_close.png) no-repeat center; }
 
 .museum-list{width: 100%;height: 0;overflow: hidden;transition: .5s;display: none;border-top: 1px solid #555555;padding: 20px 0;text-align: center;  /*넓이 필요*/position: absolute;top: 46px;left: 0;background: #000;z-index: 101;} 
 /*.on*/    
 .museum-list.on{height: auto; display: block;}
-.museum-list li{background: #000; text-align: center; width: 100%;}
+.museum-list li{/* background: #000;  */text-align: center; width: 100%;}
 .util ul li .museum-list>li>a{font-size: 14px; color: #ccc; display: block; padding: 5px 10px;}
 .util ul li .museum-list>li:hover>a{color: #fac906; text-decoration: underline;}
 
@@ -199,7 +199,7 @@ h2,h3{font-weight: bold;}
 
 /* controller */
 .main_section2 .container{position: relative;}
-.main_section2 .controller{position: absolute; top: 0; right: 0; width: 80px;}
+.main_section2 .controller{position: absolute; top: 28px; right: 0; width: 80px;}
 .main_section2 .controller .swiper-prev-btn{background: url(../images/btn_swiper_prev.png) no-repeat;
 position: absolute; top: 10px; left: -13px; margin-top: 0; width: 10px; height: 19px; z-index: 10; cursor: pointer; background-size: 10px 19px; text-indent: -9999px;}
 .main_section2 .controller .swiper-stop-btn{background: url(../images/btn_swiper_stop.png) no-repeat; position: absolute; top: 10px; right: 50px; margin-top: 0; width: 10px; height: 19px; z-index: 10; cursor: pointer; background-size: 10px 19px; text-indent: -9999px;}
@@ -237,10 +237,10 @@ background-size: 9px 17px; text-indent: -9999px;} */
 .main_section3 h3 img{width: 36px; padding-right: 20px; position: relative; top: 8px; left: 0;}
 
 /*tab 겹쳐놓음 */
-.notice_contents{width: calc(50% - 1.8%);  float: left; position: relative; padding: 0 15px;}
+.notice_contents{width: calc(50% - 1.8%);  float: left; position: relative; padding: 2px 15px;}
 .notice_contents>ul>li{float: left; line-height: 350%; }
 .notice_contents>ul>li>a{font-size: 24px; display: block; padding: 0 20px; font-family: 'notokr-regular'; }
-.notice_contents>ul>li>ul{display: none; position: absolute; top: 48px; left: 20px; border-top: 1px solid #c2c2c2; border-bottom: 1px solid #000;}
+.notice_contents>ul>li>ul{display: none; position: absolute; top: 52px; left: 20px; border-top: 1px solid #c2c2c2; border-bottom: 1px solid #000;}
 .notice_contents>ul>li>ul#tab1{display: block;}
 .notice_contents>ul>li>ul>li{padding-left: 20px; box-sizing: border-box; }
 .notice_contents>ul>li>ul>li>a:hover{text-decoration: underline;}

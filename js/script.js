@@ -52,7 +52,7 @@ function startAutoSlide(){
 }
 startAutoSlide() //열자마자 한번 실행해
 
-//슬라이드에 마우스 올리면 멈추는거 //실행안함
+//슬라이드에 마우스 올리면 멈춰
 $slideWrap.addEventListener('mouseover',function(){
     clearInterval($timer);
 })
@@ -82,9 +82,16 @@ $prev.addEventListener('click',function(){
 //span 누르면 넘어가게
 for(let y=0;y<$pagerBtn.length;y++){
     $pagerBtn[y].addEventListener('click',function(event){
-        clearInterval($timer);
+        let pageNum=event.target.innerText-1;
+        // console.log(pageNum)
+        gotoSlider(pageNum)
     })
 }
+
+
+
+
+
 
 
 // 모달창
@@ -182,22 +189,13 @@ function bannerSlide(){
 
 $('.swiper-prev-btn, .swiper-prev-btn,.swiper-stop-btn, .slider-wrapper').on('click mouseover focus', function(){
     clearInterval(setIntervalID)
-}) //setInterval 중단시키는거 clearInterval
+}) 
 
-$('.swiper-prev-btn, .swiper-prev-btn,.swiper-stop-btn, .slider-wrapper').on('mouseout leave', function(){
+$('.swiper-prev-btn, .swiper-prev-btn,.swiper-stop-btn, .slider-wrapper').on('click mouseout leave', function(){
     bannerSlide()
 })
 //mouseover focus,leave 탭키 / 마우스 떼면 배너슬라이드 진행시켜
-/* 
-//stopBtn 이미지 바뀌게
-function stopBtn(){
-    stopBtn.classList.add('playing');
-    slideBanner.stop().animate()
-}
-stopBtn.click(function(){
-    stopBtn()
-})
- */
+
 
 function rightBtn(){
     slideBanner.stop().animate({left:-(slideWidth+60)},500, function(){
@@ -218,6 +216,15 @@ nextBtn.click(function(){
 prevBtn.click(function(){
     leftBtn()
 })
+
+/* //stopBtn 이미지 바뀌게
+function stopBtn(){
+    stopBtn.classList.add('playing');
+    slideBanner.stop().animate()
+}
+stopBtn.click(function(){
+    stopBtn()
+}) */
 
 
 
@@ -255,7 +262,6 @@ const $slideContainer1=document.querySelector('.main_section3 .slide-area .slide
 const $slide1=document.querySelectorAll('.slide1');
 const $pause1=document.getElementById('btn-pause'); //멈춤
 const $slideCount1=$slide1.length;
-// console.log($slideWrap1)
 const $pager1=document.querySelector('.notice_banner .pager')
 const $pager1Btn=document.querySelectorAll('.notice_banner .pager span')
 let $currentIndex1=0;
@@ -290,7 +296,7 @@ function startAutoSlide1(){
     $timer1=setInterval(function(){
         let nextIdx=($currentIndex1+1) % $slideCount1;
         gotoSlider1(nextIdx)
-    },2000)
+    },4000)
 }
 startAutoSlide1()
 
