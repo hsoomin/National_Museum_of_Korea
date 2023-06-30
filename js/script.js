@@ -1,8 +1,17 @@
 //헤더 유틸 토글
 $('.linkList').click(function(){   
-    $(this).addClass('on').next('.museum-list').toggleClass('on')
-    $(this).addClass('on').next('.lang-list').toggleClass('on')
+    $(this).addClass('on').next('.museum-list').toggleClass('on');
+    $(this).addClass('on').next('.lang-list').toggleClass('on');
+
+    
 });
+$('.linkList>ul').mouseleave(function(){   
+        $(this).next('.museum-list').hide();
+        $(this).removeClass('on');
+});
+
+// $('.linkList').removeClass('on');
+
 
 
 //main slide
@@ -11,7 +20,7 @@ const $slideContainer=document.querySelector('.slider-container'); //ul
 const $slide=document.querySelectorAll('.slide');
 const $next=document.getElementById('next');
 const $prev=document.getElementById('prev');
-const $pause=document.getElementById('btn-pause'); //멈춤
+const $pause=document.getElementById('main-btn-pause'); //멈춤
 const $slideCount=$slide.length;
 // console.log($sildeCount)
 const $pager=document.querySelector('.pager')
@@ -78,7 +87,11 @@ $prev.addEventListener('click',function(){
     }
 })
 
-
+$pause.addEventListener('click',function(){
+    clearInterval($timer)
+    $('#main-btn-pause').css("background-image", "url(./images/main_btn_play.png)");
+    
+})
 //span 누르면 넘어가게
 for(let y=0;y<$pagerBtn.length;y++){
     $pagerBtn[y].addEventListener('click',function(event){
@@ -94,7 +107,7 @@ for(let y=0;y<$pagerBtn.length;y++){
 
 
 
-// 모달창
+// 오시는길 모달창
 $('.find_map').on('click', function () {
     $('.modal').addClass('show-modal');
     
@@ -256,11 +269,19 @@ for(let i=0; i<targetLink.length;i++){
 }
 
 
+
+
+
+
+
+
+
+
 //메인3 슬라이드
 const $slideWrap1=document.querySelector('.main_section3 .slide-area'); //div
 const $slideContainer1=document.querySelector('.main_section3 .slide-area .slider-container');
 const $slide1=document.querySelectorAll('.slide1');
-const $pause1=document.getElementById('btn-pause'); //멈춤
+const $pause1=document.getElementById('main3-btn-pause'); //멈춤
 const $slideCount1=$slide1.length;
 const $pager1=document.querySelector('.notice_banner .pager')
 const $pager1Btn=document.querySelectorAll('.notice_banner .pager span')
@@ -312,8 +333,10 @@ $slideWrap1.addEventListener('mouseout',function(){
 //멈춤 다시만들기
 $pause1.addEventListener('click',function(){
     clearInterval($timer1)
-})
+    $('#main3-btn-pause').css("background-image", "url(./images/main_btn_play.png)");
+    
 
+})
 
 //span 누르면 넘어가게
 for(let y=0;y<$pager1Btn.length;y++){
@@ -324,13 +347,18 @@ for(let y=0;y<$pager1Btn.length;y++){
 
 
 
+
+
+
+
+
 //메인4 행사 슬라이드
 const slideBanner2=$('.event .slider-wrapper .slides'); //배너 ul
 const slideList2=$('.event .slider-wrapper .slides li'); //배너 ul li
 const prevBtn2=$('.event .controller .swiper-prev-btn');
 const nextBtn2=$('.event .controller .swiper-next-btn');
 let slideWidth2=slideList2.width(); //320px
-console.log(slideWidth2)
+// console.log(slideWidth2)
 
 function rightBtn2(){
     slideBanner2.stop().animate({left:-(slideWidth2)},500, function(){
