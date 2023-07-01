@@ -421,17 +421,15 @@ for(let y=0;y<$pager1Btn.length;y++){
 
 
 //푸터 토글
-$('.btn-site').click(function(){   
+/* $('.btn-site').click(function(){   
     $(this).next('.linkList').toggleClass('on');
 
 });
-
-
-/* $('.btn-site').click(function(){   
-    $(this).removeClass();
-    $(this).addClass('on').next('.linkList').toggleClass('on')
-});
  */
 
+$('.footer_center_left .familySite .btn-site').on('click', function() {
+    $(this).next('.linkList').toggleClass('on');
+    $(this).toggleClass('on');
+});
 
 
