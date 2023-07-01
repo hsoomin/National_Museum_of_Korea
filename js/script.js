@@ -1,20 +1,23 @@
-//헤더 유틸 토글
-$('.linkList').click(function(){   
-    $(this).addClass('on').next('.museum-list').toggleClass('on');
-    $(this).addClass('on').next('.lang-list').toggleClass('on');
-
-    
-});
-$('.linkList>ul').mouseleave(function(){   
-        $(this).next('.museum-list').hide();
-        $(this).removeClass('on');
+// //헤더 유틸 토글
+$('.museum').click(function() {
+    $(this).toggleClass('on').next('.museum-list').toggleClass('on');
 });
 
-// $('.linkList').removeClass('on');
+$('.museum-list').mouseleave(function() {
+    $(this).removeClass('on');
+});
+
+$('.language').click(function() {
+    $(this).toggleClass('on').next('.lang-list').toggleClass('on');
+});
+
+$('.lang-list').mouseleave(function() {
+    $(this).removeClass('on');
+});
 
 
 
-//main slide
+// //main slide
 const $slideWrap=document.querySelector('.slide-area'); //div
 const $slideContainer=document.querySelector('.slider-container'); //ul
 const $slide=document.querySelectorAll('.slide');
@@ -22,7 +25,6 @@ const $next=document.getElementById('next');
 const $prev=document.getElementById('prev');
 const $pause=document.getElementById('main-btn-pause'); //멈춤
 const $slideCount=$slide.length;
-// console.log($sildeCount)
 const $pager=document.querySelector('.pager')
 const $pagerBtn=document.querySelectorAll('.pager span')
 let $currentIndex=0;
@@ -59,7 +61,7 @@ function startAutoSlide(){
         gotoSlider(nextIdx)
     },4000)
 }
-startAutoSlide() //열자마자 한번 실행해
+startAutoSlide()
 
 //슬라이드에 마우스 올리면 멈춰
 $slideWrap.addEventListener('mouseover',function(){
@@ -90,13 +92,28 @@ $prev.addEventListener('click',function(){
 $pause.addEventListener('click',function(){
     clearInterval($timer)
     $('#main-btn-pause').css("background-image", "url(./images/main_btn_play.png)");
-    
-})
+}) 
+
+
+
+
+// $pause.addEventListener('click', function() {
+//     if(){  //
+//         clearInterval($timer);
+//         $('#main-btn-pause').css("background-image", "url(./images/main_btn_play.png)");
+//     }else{
+//         startAutoSlide(); 
+//         $('#main-btn-pause').css("background-image", "url(./images/main_btn_stop.png)");
+
+//     }
+//   }); 
+
+
+
 //span 누르면 넘어가게
 for(let y=0;y<$pagerBtn.length;y++){
     $pagerBtn[y].addEventListener('click',function(event){
         let pageNum=event.target.innerText-1;
-        // console.log(pageNum)
         gotoSlider(pageNum)
     })
 }
@@ -105,9 +122,7 @@ for(let y=0;y<$pagerBtn.length;y++){
 
 
 
-
-
-// 오시는길 모달창
+// 모달창
 $('.find_map').on('click', function () {
     $('.modal').addClass('show-modal');
     
@@ -180,6 +195,8 @@ $('.modal').on('click', function () {
 })
 
 
+
+
 // 메인2 전시 슬라이드
 const slideBanner=$('.main_section2 .slider-wrapper .banner-area'); //배너 ul
 const slideList=$('.main_section2 .slider-wrapper .banner-area li'); //배너 ul li
@@ -189,7 +206,7 @@ const stopBtn=$('.swiper-stop-btn');
 
 let slideWidth=slideList.width(); //315px
 let setIntervalID;
-// console.log(slideWidth);
+
 bannerSlide()
 function bannerSlide(){
     setIntervalID=setInterval(()=>{
@@ -203,11 +220,9 @@ function bannerSlide(){
 $('.swiper-prev-btn, .swiper-prev-btn,.swiper-stop-btn, .slider-wrapper').on('click mouseover focus', function(){
     clearInterval(setIntervalID)
 }) 
-
-$('.swiper-prev-btn, .swiper-prev-btn,.swiper-stop-btn, .slider-wrapper').on('click mouseout leave', function(){
+$('.swiper-prev-btn, .swiper-prev-btn,.swiper-stop-btn, .slider-wrapper').on('click mouseout', function(){
     bannerSlide()
 })
-//mouseover focus,leave 탭키 / 마우스 떼면 배너슬라이드 진행시켜
 
 
 function rightBtn(){
@@ -220,31 +235,33 @@ function leftBtn(){
     $('.main_section2 .slider-wrapper .banner-area li:last').insertBefore('.main_section2 .slider-wrapper .banner-area li:first');
     slideBanner.css({left:-(slideWidth+60)}).stop().animate({left:0},500)
 }
+//수정하기/////////////////////////
+// function stopBtn(){
+//     clearInterval(setIntervalID);
+//     $('.swiper-stop-btn').on('click', stopBtn);
+// }
 
-
-// 클릭했을때
+// nextBtn,prevBtn
 nextBtn.click(function(){
     rightBtn()
 })
+
 prevBtn.click(function(){
     leftBtn()
 })
 
-/* //stopBtn 이미지 바뀌게
-function stopBtn(){
-    stopBtn.classList.add('playing');
-    slideBanner.stop().animate()
-}
+//수정하기///////////////////////////
 stopBtn.click(function(){
-    stopBtn()
-}) */
+    clearInterval(setIntervalID);
+    $('.swiper-stop-btn').css("background", "url(./images/btn_swiper_play.png)");
+})
+
 
 
 
 //main3 tab메뉴
 const targetLink=document.querySelectorAll('.notice_contents>ul>li>a');
 const tabContent=document.querySelectorAll('.notice_contents>ul>li>ul');
-// console.log(tabContent)
 
 for(let i=0; i<targetLink.length;i++){
     targetLink[i].addEventListener('click',function(e){
@@ -267,12 +284,6 @@ for(let i=0; i<targetLink.length;i++){
         }
     })
 }
-
-
-
-
-
-
 
 
 
@@ -352,61 +363,61 @@ for(let y=0;y<$pager1Btn.length;y++){
 
 
 
-//메인4 행사 슬라이드
-const slideBanner2=$('.event .slider-wrapper .slides'); //배너 ul
-const slideList2=$('.event .slider-wrapper .slides li'); //배너 ul li
-const prevBtn2=$('.event .controller .swiper-prev-btn');
-const nextBtn2=$('.event .controller .swiper-next-btn');
-let slideWidth2=slideList2.width(); //320px
-// console.log(slideWidth2)
+// //메인4 행사 슬라이드
+// const slideBanner2=$('.event .slider-wrapper .slides'); //배너 ul
+// const slideList2=$('.event .slider-wrapper .slides li'); //배너 ul li
+// const prevBtn2=$('.event .controller .swiper-prev-btn');
+// const nextBtn2=$('.event .controller .swiper-next-btn');
+// let slideWidth2=slideList2.width(); //320px
+// // console.log(slideWidth2)
 
-function rightBtn2(){
-    slideBanner2.stop().animate({left:-(slideWidth2)},500, function(){
-        $('.event .slider-wrapper .slides li:first').insertAfter('.event .slider-wrapper .slides li:last');
-        slideBanner2.css({left:0})
-    })
-}
-function leftBtn2(){
-    $('.event .slider-wrapper .slides li:last').insertBefore('.event .slider-wrapper .slides li:first');
-    slideBanner2.css({left:-(slideWidth2)}).stop().animate({left:0},500)
-}
+// function rightBtn2(){
+//     slideBanner2.stop().animate({left:-(slideWidth2)},500, function(){
+//         $('.event .slider-wrapper .slides li:first').insertAfter('.event .slider-wrapper .slides li:last');
+//         slideBanner2.css({left:0})
+//     })
+// }
+// function leftBtn2(){
+//     $('.event .slider-wrapper .slides li:last').insertBefore('.event .slider-wrapper .slides li:first');
+//     slideBanner2.css({left:-(slideWidth2)}).stop().animate({left:0},500)
+// }
 
-// 클릭했을때
-nextBtn2.click(function(){
-    rightBtn2()
-})
-prevBtn2.click(function(){
-    leftBtn2()
-})
-
-
+// // 클릭했을때
+// nextBtn2.click(function(){
+//     rightBtn2()
+// })
+// prevBtn2.click(function(){
+//     leftBtn2()
+// })
 
 
-//메인4 온라인 전시관 슬라이드
-const slideBanner1=$('.online_exhibition .slider-wrapper .slides'); //배너 ul
-const slideList1=$('.online_exhibition .slider-wrapper .slides li'); //배너 ul li
-const prevBtn1=$('.online_exhibition .controller .swiper-prev-btn');
-const nextBtn1=$('.online_exhibition .controller .swiper-next-btn');
-let slideWidth1=slideList1.width(); //670px
 
-function rightBtn1(){
-    slideBanner1.stop().animate({left:-(slideWidth1)},500, function(){
-        $('.online_exhibition .slider-wrapper .slides li:first').insertAfter('.online_exhibition .slider-wrapper .slides li:last');
-        slideBanner1.css({left:0})
-    })
-}
-function leftBtn1(){
-    $('.online_exhibition .slider-wrapper .slides li:last').insertBefore('.online_exhibition .slider-wrapper .slides li:first');
-    slideBanner1.css({left:-(slideWidth1)}).stop().animate({left:0},500)
-}
 
-// 클릭했을때
-nextBtn1.click(function(){
-    rightBtn1()
-})
-prevBtn1.click(function(){
-    leftBtn1()
-})
+// //메인4 온라인 전시관 슬라이드
+// const slideBanner1=$('.online_exhibition .slider-wrapper .slides'); //배너 ul
+// const slideList1=$('.online_exhibition .slider-wrapper .slides li'); //배너 ul li
+// const prevBtn1=$('.online_exhibition .controller .swiper-prev-btn');
+// const nextBtn1=$('.online_exhibition .controller .swiper-next-btn');
+// let slideWidth1=slideList1.width(); //670px
+
+// function rightBtn1(){
+//     slideBanner1.stop().animate({left:-(slideWidth1)},500, function(){
+//         $('.online_exhibition .slider-wrapper .slides li:first').insertAfter('.online_exhibition .slider-wrapper .slides li:last');
+//         slideBanner1.css({left:0})
+//     })
+// }
+// function leftBtn1(){
+//     $('.online_exhibition .slider-wrapper .slides li:last').insertBefore('.online_exhibition .slider-wrapper .slides li:first');
+//     slideBanner1.css({left:-(slideWidth1)}).stop().animate({left:0},500)
+// }
+
+// // 클릭했을때
+// nextBtn1.click(function(){
+//     rightBtn1()
+// })
+// prevBtn1.click(function(){
+//     leftBtn1()
+// })
 
 
 //푸터 토글
