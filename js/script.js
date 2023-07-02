@@ -1,35 +1,31 @@
-// //헤더 유틸 토글
-$('.museum').click(function() {
+//header util 토글
+$('.museum').click(function(){
     $(this).toggleClass('on').next('.museum-list').toggleClass('on');
 });
-
-$('.museum-list').mouseleave(function() {
+$('.museum-list').mouseleave(function(){
     $(this).removeClass('on');
 });
-
-$('.language').click(function() {
+$('.language').click(function(){
     $(this).toggleClass('on').next('.lang-list').toggleClass('on');
 });
-
-$('.lang-list').mouseleave(function() {
+$('.lang-list').mouseleave(function(){
     $(this).removeClass('on');
 });
 
 
-
-// //main slide
-const $slideWrap=document.querySelector('.slide-area'); //div
-const $slideContainer=document.querySelector('.slider-container'); //ul
+//main banner slide
+const $slideWrap=document.querySelector('.slide-area');
+const $slideContainer=document.querySelector('.slider-container');
 const $slide=document.querySelectorAll('.slide');
 const $next=document.getElementById('next');
-const $prev=document.getElementById('prev');
-const $pause=document.getElementById('main-btn-pause'); //멈춤
+const $prev=document.getElementById('prev'); 
 const $slideCount=$slide.length;
 const $pager=document.querySelector('.pager')
 const $pagerBtn=document.querySelectorAll('.pager span')
 let $currentIndex=0;
 let $sliderHeight=0; 
 let $timer; 
+
 
 
 for(let i=0;i<$slideCount;i++){
@@ -63,18 +59,17 @@ function startAutoSlide(){
 }
 startAutoSlide()
 
-//슬라이드에 마우스 올리면 멈춰
+/* // mouseover,mouseout
 $slideWrap.addEventListener('mouseover',function(){
     clearInterval($timer);
 })
 $slideWrap.addEventListener('mouseout',function(){
     startAutoSlide();
-})
+}) */
 
-//prev,next,pause
+//prev,next
 $next.addEventListener('click',function(){
     if($currentIndex==$slideCount-1){
-        // $next.classList,add('disabled');
         gotoSlider(0);
     }else{
         gotoSlider($currentIndex+1)
@@ -89,26 +84,20 @@ $prev.addEventListener('click',function(){
     }
 })
 
-$pause.addEventListener('click',function(){
-    clearInterval($timer)
-    $('#main-btn-pause').css("background-image", "url(./images/main_btn_play.png)");
-}) 
+//pauseBtn
+const $pauseBtn=document.getElementById('main-btn-pause');
+let isPaused = false;
 
-
-
-
-/* $pause.addEventListener('click', function() {
-    if(){  //
+$pauseBtn.addEventListener('click', function() {
+    if (isPaused) {
+        startAutoSlide();
+        $pauseBtn.style.backgroundImage = 'url(./images/main_btn_stop.png)';
+    } else {
         clearInterval($timer);
-        $('#main-btn-pause').css("background-image", "url(./images/main_btn_play.png)");
-    }else{
-        startAutoSlide(); 
-        $('#main-btn-pause').css("background-image", "url(./images/main_btn_stop.png)");
-
+        $pauseBtn.style.backgroundImage = 'url(./images/main_btn_play.png)';
     }
-  });  */
-
-
+    isPaused = !isPaused;
+});
 
 //span 누르면 넘어가게
 for(let y=0;y<$pagerBtn.length;y++){
@@ -119,10 +108,7 @@ for(let y=0;y<$pagerBtn.length;y++){
 }
 
 
-
-
-
-// 모달창
+// 오시는길 모달
 $('.find_map').on('click', function () {
     $('.modal').addClass('show-modal');
     
@@ -185,7 +171,6 @@ $('.find_map').on('click', function () {
         title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
         image : markerImage // 마커 이미지 
 
-
     });
     }
 })
@@ -195,16 +180,14 @@ $('.modal').on('click', function () {
 })
 
 
-
-
 // 메인2 전시 슬라이드
-const slideBanner=$('.main_section2 .slider-wrapper .banner-area'); //배너 ul
-const slideList=$('.main_section2 .slider-wrapper .banner-area li'); //배너 ul li
+const slideBanner=$('.main_section2 .slider-wrapper .banner-area'); 
+const slideList=$('.main_section2 .slider-wrapper .banner-area li'); 
 const prevBtn=$('.prev-btn');
 const nextBtn=$('.next-btn');
 const stopBtn=$('.stop-btn');
 
-let slideWidth=slideList.width(); //315px
+let slideWidth=slideList.width();
 let setIntervalID;
 
 bannerSlide()
@@ -217,13 +200,12 @@ function bannerSlide(){
     }, 2000)
 }
 
-$('.prev-btn, .next-btn, .stop-btn, .slider-wrapper').on('click mouseover focus', function(){
-    clearInterval(setIntervalID)
-}) 
-$('.prev-btn, .next-btn, .stop-btn, .slider-wrapper').on('click mouseout', function(){
-    bannerSlide()
-})
-
+// $('.prev-btn, .next-btn, .stop-btn, .slider-wrapper').on('click mouseover focus', function(){
+//     clearInterval(setIntervalID)
+// }) 
+// $('.prev-btn, .next-btn, .stop-btn, .slider-wrapper').on('click mouseout', function(){
+//     bannerSlide()
+// })
 
 function rightBtn(){
     slideBanner.stop().animate({left:-(slideWidth+60)},300, function(){
@@ -245,11 +227,16 @@ prevBtn.click(function(){
     leftBtn()
 })
 
-//수정하기///////////////////////////
+// //수정하기///////////////////////////
 stopBtn.click(function(){
-    clearInterval(setIntervalID);
-    $('.stop-btn').css("background", "url(./images/btn_swiper_play.png)");
-})
+    if (setIntervalID) {
+        clearInterval(setIntervalID);
+        $('.stop-btn').css("background", "url(./images/btn_swiper_play.png)");
+    } else {
+        bannerSlide();
+        $('.stop-btn').css("background", "url(./images/btn_swiper_stop.png)");
+    }
+});
 
 
 
@@ -260,12 +247,9 @@ const tabContent=document.querySelectorAll('.notice_contents>ul>li>ul');
 
 for(let i=0; i<targetLink.length;i++){
     targetLink[i].addEventListener('click',function(e){
-        // console.log(e); 
         e.preventDefault();
         const orgTarget=e.target.getAttribute('href'); 
-        // console.log(orgTarget);
         const tabTarget=orgTarget.replace('#',''); 
-        // console.log(tabTarget);
 
 
         for(let j=0;j<tabContent.length;j++){
@@ -281,106 +265,130 @@ for(let i=0; i<targetLink.length;i++){
 }
 
 
+//main3 알립니다 슬라이드
+const banner = $('.notice_slider-container>li');
+const button = $('.buttonList>li');
+let cnt = 0;
+let intervalId;
 
+timer();
+  function timer() {
+    intervalId = setInterval(function(){
+      let prev = banner.eq(cnt);
+      let prevBtn = button.eq(cnt);
+      move(prev,0,'-100%');
+      prevBtn.removeClass('active');
+      cnt++;
+      if (cnt==3) cnt=0;
+      let next=banner.eq(cnt);
+      move(next,'100%',0);
+      let nextBtn = button.eq(cnt);
+      nextBtn.addClass('active');
+    }, 4000);
+  }
 
-// // //메인3 슬라이드
-// const $slideWrap1=document.querySelector('.notice_slide-area');
-// const $slideContainer1=document.querySelector('notice_slider-container');
-// const $slide1=document.querySelectorAll('.notice_slide');
-// const $pause1=document.getElementById('main3-btn-pause');
-// const $slideCount1=$slide1.length;
-// const $pager1=document.querySelector('.notice_banner .pager')
-// const $pager1Btn=document.querySelectorAll('.notice_banner .pager span')
-// let $currentIndex1=0;
-// let $sliderHeight1=0;
-// let $timer1; 
+function move(tg,start,end){  //위치 잡은거
+	tg.css('left',start).stop().animate({left:end},500)
+}
 
-
-// for(let i=0;i<$slideCount1;i++){
-//     if($sliderHeight1<$slide1[i].offsetHeight){
-//         $sliderHeight1=$slide1[i].offsetHeight;
-//     }
-// }
-
-// $slideWrap1.style.height=$sliderHeight1+'px'
-// $slideContainer1.style.height=$sliderHeight1+'px'
-// for(let p=0;j<$slideCount1;j++){
-//     $slide1[j].style.left=j*100+'%'
-// }
-
-// function gotoSlider1(idx){
-//     $slideContainer1.classList.add('animated');
-//     $slideContainer1.style.left=-100*idx+'%';
-//     $currentIndex1=idx;
-//     for(let k=0;k<$pager1Btn.length;k++){
-//         $pager1Btn[k].classList.remove('active')
-//     }
-//     $pager1Btn[idx].classList.add('active')
-// }
-// gotoSlider1(0)
-
-// function startAutoSlide1(){
-//     $timer1=setInterval(function(){
-//         let nextIdx=($currentIndex1+1) % $slideCount1;
-//         gotoSlider1(nextIdx)
-//     },4000)
-// }
-// startAutoSlide1()
-
-// //슬라이드에 마우스 올리면 멈춰
-// $slideWrap1.addEventListener('mouseover',function(){
-//     clearInterval($timer1);
-// })
-// $slideWrap1.addEventListener('mouseout',function(){
-//     startAutoSlide1();
-// })
-
-
-// //이미지변경 다시만들기
-// $pause1.addEventListener('click',function(){
-//     clearInterval($timer1)
-//     $('#main3-btn-pause').css("background-image", "url(./images/main_btn_play.png)");
+//버튼리스트
+button.click(function(){
+    let tg=$(this);
+    let i=$('.buttonList>li').index(this);
+    button.removeClass('active')
+    tg.addClass('active')
     
+    if(cnt>i){
+        let cntEl=banner.eq(cnt);
+        let nextEl=banner.eq(i);
+        cntEl.css('left',0).stop().animate({left:'100%'},500);
+        nextEl.css('left','-100%').stop().animate({left:0},500);
+        cnt=i; 
+        
+    }else if(cnt<i){
+        let cntEl=banner.eq(cnt);
+        let nextEl=banner.eq(i);
+        cntEl.css('left',0).stop().animate({left:'-100%'},500);
+        nextEl.css('left','100%').stop().animate({left:0},500);
+        cnt=i;
+    }else if(cnt==i) 
+    return;
+})
 
-// })
 
-// //span 누르면 넘어가게
-// for(let y=0;y<$pager1Btn.length;y++){
-//     $pager1Btn[y].addEventListener('click',function(event){
-//         gotoSlider1(y)
-//     })
-// }
+const pauseBtn = $('#main3-btn-pause');
+
+pauseBtn.click(function() {
+  if ($(this).hasClass('paused')) {
+    intervalId=setInterval(function() {
+      let prev=banner.eq(cnt);
+      let prevBtn=button.eq(cnt);
+      move(prev,0,'-100%');
+      prevBtn.removeClass('active');
+      cnt++;
+      if (cnt==3) cnt=0;
+      let next=banner.eq(cnt);
+      move(next,'100%',0);
+
+      let nextBtn=button.eq(cnt);
+      nextBtn.addClass('active');
+    }, 4000);
+
+    $(this).removeClass('paused');
+    $(this).css("background", "url(./images/main_btn_stop.png)");
+  }else {
+    clearInterval(intervalId);
+    $(this).addClass('paused');
+    $(this).css("background", "url(./images/main_btn_play.png)");
+  }
+});
 
 
-    
 
 //메인4 행사 슬라이드
 const slideBanner2=$('.event .slider-wrapper .slides'); 
 const slideList2=$('.event .slider-wrapper .slides li'); 
 const prevBtn2=$('.event-prev-btn');
 const nextBtn2=$('.event-next-btn');
-let slideWidth2=slideList2.width(); //320px
+let slideWidth2=slideList2.width();
 
-// let cntPage=$('event-current-page');
-// let ttlPage=$('event-ttl-page');
-// let cntNumber = 0;
-// let ttlPageNumber = 2;
+let cntPage=$('.event-current-page');
+let ttlPage=$('.event-ttl-page');
+let cntNumber = 1;
+let ttlPageNumber=2;
+
+
+// function updateCntPage(){
+//     cntPage.text(cntNumber);
+// }
 
 
 function rightBtn2(){
     slideBanner2.stop().animate({left:-(slideWidth2)},500, function(){
         $('.event .slider-wrapper .slides li:first').insertAfter('.event .slider-wrapper .slides li:last');
         slideBanner2.css({left:0})
+        
+        cntNumber++;  //수정하기
+        cntPage.text(cntNumber);
+        if(cntNumber>=ttlPageNumber){
+            cntNumber = 1;
+        }
     })
 }
 function leftBtn2(){
     $('.event .slider-wrapper .slides li:last').insertBefore('.event .slider-wrapper .slides li:first');
     slideBanner2.css({left:-(slideWidth2)}).stop().animate({left:0},500);
+    
+    cntNumber--; //수정하기
+    cntPage.text(cntNumber);
+    if (cntNumber<1){
+        cntNumber=ttlPageNumber;
+    }
 }
 
-// 클릭했을때
 nextBtn2.click(function(){
     rightBtn2()
+    
 })
 prevBtn2.click(function(){
     leftBtn2()
@@ -389,11 +397,11 @@ prevBtn2.click(function(){
 
 
 //메인4 온라인 전시관 슬라이드
-const slideBanner1=$('.online_exhibition .slider-wrapper .slides'); //배너 ul
-const slideList1=$('.online_exhibition .slider-wrapper .slides li'); //배너 ul li
+const slideBanner1=$('.online_exhibition .slider-wrapper .slides'); 
+const slideList1=$('.online_exhibition .slider-wrapper .slides li'); 
 const prevBtn1=$('.online-prev-btn');
 const nextBtn1=$('.online-next-btn');
-let slideWidth1=slideList1.width(); //670px
+let slideWidth1=slideList1.width(); 
 
 function rightBtn1(){
     slideBanner1.stop().animate({left:-(slideWidth1)},500, function(){
@@ -406,7 +414,6 @@ function leftBtn1(){
     slideBanner1.css({left:-(slideWidth1)}).stop().animate({left:0},500)
 }
 
-// 클릭했을때
 nextBtn1.click(function(){
     rightBtn1()
 })
@@ -415,7 +422,7 @@ prevBtn1.click(function(){
 })
 
 
-//푸터 토글
+//footer 토글
 $('.footer_center_left .familySite .btn-site').on('click',function(){
     $(this).next('.linkList').toggleClass('on');
     $(this).toggleClass('on'); 
