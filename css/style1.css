@@ -9,7 +9,7 @@ h2,h3{font-weight: bold;}
 .container{width: 1440px; height: inherit; margin: 0 auto; /*background: rgba(0,0,0,.2);*/}
 
 /* 레이아웃 */
-#header{height: 180px; background: #FFF; position: fixed;top: 0; left: 0; width: 100%; z-index: 999;} 
+#header{height: 180px; background: #FFF; position: fixed;top: 0; left: 0; width: 100%; z-index: 9999999999;} 
 #main{position: relative; top: 180px; left: 0;}
 .page-header{height: 140px; margin: 50px 0 60px;}
 .page-contents{height: 1700px;padding: 0 15px;}
