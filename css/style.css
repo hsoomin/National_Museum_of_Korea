@@ -69,7 +69,7 @@ background: #000; z-index: 101;}
 .depth1>li:hover>a{color: #3f0b9f}
 
 /* depth2 */
-.depth2{padding-left: 230px; box-sizing: border-box; background: #000; width: 100%; position: absolute; top: 104px; left: 0; display: none; }
+.depth2{padding-left: 230px; box-sizing: border-box; background: #000; width: 100%; position: absolute; top: 105px; left: 0; display: none; }
 .depth1>li:hover>.depth2{display: block;}
 .depth2>li{display: inline-block; padding: 14px 20px; position: relative; } 
 .depth2>li>a{font-size: 15px; color: #fff;}
