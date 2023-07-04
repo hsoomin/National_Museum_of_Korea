@@ -403,7 +403,7 @@ function leftBtn1(){
     onCntNumber--;
     if (onCntNumber < 1) {
         onCntNumber = onTtlPageNumber;
-      }
+    }
     onCntPage.text(onCntNumber);
 }
 
@@ -416,7 +416,13 @@ prevBtn1.click(function(){
 
 
 //footer 토글
-$('.footer_center_left .familySite .btn-site').on('click',function(){
-    $(this).next('.linkList').toggleClass('on');
-    $(this).toggleClass('on'); 
+$('.footer_center_left .familySite .btn-site').click(function() {
+    let linkList = $(this).next('.linkList');
+    let btnSite = $(this);
+
+    $('.linkList').not(linkList).removeClass('on');
+    $('.btn-site').not(btnSite).removeClass('on');
+
+    linkList.toggleClass('on');
+    btnSite.toggleClass('on')
 });
