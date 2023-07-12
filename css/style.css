@@ -211,14 +211,14 @@ background: #000; z-index: 101;}
 .notice_banner .notice_slide-area .notice_slider-container .notice_slide:nth-child(1){left: 0;}
 .notice_banner .notice_slide-area .notice_slider-container .notice_slide:nth-child(2){left: 100%}
 .notice_banner .notice_slide-area .notice_slider-container .notice_slide:nth-child(3){left: 200%;}
-.notice_banner .notice_slide-area .notice_slider-container .notice_slide a img{width: 695px; height: 100%;}
+.notice_banner .notice_slide-area .notice_slider-container .notice_slide a img{width: 694px; height: 100%;}
 .notice_banner .notice_slide-area #main3-btn-pause{background-image: url(../images/main_btn_stop.png); width: 50px; height: 50px; position: absolute; bottom:10px;right: 15px; z-index: 99999999999; text-indent: -9999px;}
 
 
 /*notice_banner buttonList*/
 .notice_banner .notice_slide-area .buttonList{position: absolute; bottom: 20px; right: 80px; z-index: 99999999999;}
-.notice_banner .notice_slide-area .buttonList li{width: 20px; height: 20px; background: #fff; border-radius: 50%; display: inline-block; text-indent: -999999em; margin: 0 6px; opacity: 1;}
-.notice_banner .notice_slide-area .buttonList li.active{background: #3f0b9f;}
+.notice_banner .notice_slide-area .buttonList li{width: 20px; height: 20px; background: #fff; border:1px solid #ddd;border-radius: 50%; display: inline-block; text-indent: -999999em; margin: 0 6px; opacity: 1; }
+.notice_banner .notice_slide-area .buttonList li.active{background: #3f0b9f; }
 .notice_banner .notice_slide-area .buttonList li a{display: block;}
 
 
