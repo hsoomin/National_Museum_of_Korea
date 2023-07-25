@@ -254,20 +254,20 @@ let cnt = 0;
 let intervalId;
 
 timer();
-  function timer() {
+function timer() {
     intervalId = setInterval(function(){
-      let prev = banner.eq(cnt);
-      let prevBtn = button.eq(cnt);
-      move(prev,0,'-100%');
-      prevBtn.removeClass('active');
-      cnt++;
-      if (cnt==3) cnt=0;
-      let next=banner.eq(cnt);
-      move(next,'100%',0);
-      let nextBtn = button.eq(cnt);
-      nextBtn.addClass('active');
+    let prev = banner.eq(cnt);
+    let prevBtn = button.eq(cnt);
+    move(prev,0,'-100%');
+    prevBtn.removeClass('active');
+    cnt++;
+    if (cnt==3) cnt=0;
+    let next=banner.eq(cnt);
+    move(next,'100%',0);
+    let nextBtn = button.eq(cnt);
+    nextBtn.addClass('active');
     }, 4000);
-  }
+}
 
 function move(tg,start,end){  //위치 잡은거
 	tg.css('left',start).stop().animate({left:end},500)
@@ -300,28 +300,28 @@ button.click(function(){
 const pauseBtn = $('#main3-btn-pause');
 
 pauseBtn.click(function() {
-  if ($(this).hasClass('paused')) {
-    intervalId=setInterval(function() {
-      let prev=banner.eq(cnt);
-      let prevBtn=button.eq(cnt);
-      move(prev,0,'-100%');
-      prevBtn.removeClass('active');
-      cnt++;
-      if (cnt==3) cnt=0;
-      let next=banner.eq(cnt);
-      move(next,'100%',0);
+    if ($(this).hasClass('paused')) {
+        intervalId=setInterval(function() {
+        let prev=banner.eq(cnt);
+        let prevBtn=button.eq(cnt);
+        move(prev,0,'-100%');
+        prevBtn.removeClass('active');
+        cnt++;
+        if (cnt==3) cnt=0;
+        let next=banner.eq(cnt);
+        move(next,'100%',0);
 
-      let nextBtn=button.eq(cnt);
-      nextBtn.addClass('active');
-    }, 4000);
+        let nextBtn=button.eq(cnt);
+        nextBtn.addClass('active');
+        }, 4000);
 
     $(this).removeClass('paused');
     $(this).css("background", "url(./images/main_btn_stop.png)");
-  }else {
-    clearInterval(intervalId);
-    $(this).addClass('paused');
-    $(this).css("background", "url(./images/main_btn_play.png)");
-  }
+    }else {
+        clearInterval(intervalId);
+        $(this).addClass('paused');
+        $(this).css("background", "url(./images/main_btn_play.png)");
+    }
 });
 
 
@@ -345,7 +345,7 @@ function rightBtn2(){
         
         cntNumber++;
         if (cntNumber>ttlPageNumber) {
-          cntNumber=1;
+            cntNumber=1;
         }
         cntPage.text(cntNumber);
     })
