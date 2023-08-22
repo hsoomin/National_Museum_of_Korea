@@ -119,10 +119,11 @@ background: #000; z-index: 101;}
 
 /* main */
 .board-list-header>ul>li{float: left; margin-right: 3px;}
+.board-list-header>ul>li.active>a {border-bottom: 4px solid #000;}
 .board-list-header>ul>li>a{padding: 20px 40px; display: block; border-bottom: 4px solid #aaaaaa;}
+.board-list-header>ul>li.active>a>span {color: #000;}
 .board-list-header>ul>li>a>span{font-size: 25px; color: #555;}
-.board-list-header>ul>li:first-child>a{border-bottom: 4px solid #000;}
-.board-list-header>ul>li:first-child>a>span{color: #000;}
+
 
 .searchForm .search-box{width: 460px; float: right; position: relative; margin-top: 90px;} /*mb:50다시*/
 .btn-list-search{background: url(../images/menubar/btn_board_search.png) no-repeat; width: 29px; height: 29px;
